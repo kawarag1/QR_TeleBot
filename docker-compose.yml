@@ -1,0 +1,9 @@
+services:
+
+  qr_bot:
+    container_name: qrcode_bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    command: ["python", "main.py"]

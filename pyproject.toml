@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "telebot"
+version = "0.1.0"
+description = ""
+authors = ["kawaragi <dima.kretinin.05@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pytelegrambotapi = "^4.25.0"
+pypng = "^0.20220715.0"
+pyqrcode = "^1.2.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
