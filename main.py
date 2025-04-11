@@ -4,8 +4,7 @@ import pyqrcode
 import os
 
 
-
-bot = telebot.TeleBot()
+bot = telebot.TeleBot(os.getenv("API_KEY"))
 
 @bot.message_handler(commands=['start'])
 def welcome_message(message):
