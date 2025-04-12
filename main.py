@@ -1,48 +1,21 @@
-import telebot
-import png
-import pyqrcode
-import os
+import asyncio
 
-
-bot = telebot.TeleBot(os.getenv("API_KEY"))
-
-@bot.message_handler(commands=['start'])
-def welcome_message(message):
-    bot.send_message(message.chat.id, f'Привет! Я телеграмм бот для создания QR-кодов!')
+from app.bot.bot_instance import bot
+from app.message_handlers.url_handler import *
+from app.message_handlers.welcome_message import *
 
 
 
-@bot.message_handler(commands=['make'])
-def reply(message):
-    bot.send_message(message.chat.id, "Отправьте ссылку, которую хотите превратить в qr-код")
-
-@bot.message_handler(func=lambda message:True)
-def make_qr(message):
+async def main():
     try:
-        url = message.text
-        qrcode = pyqrcode.create(url)
-        qrcode.png("qrcode.png", scale = 6)
-        with open("qrcode.png", mode="rb") as file:
-            bot.send_photo(message.chat.id, photo=file, caption="Ваш QR-код")
-        os.remove("qrcode.png")
+        # await bot.infinity_polling()
+        await bot.infinity_polling()
     except Exception as e:
-        bot.send_message(message.chat.id, f"Извините< произошла какая-то ошибка")
-
-
-
-
+        print(f"Bot crashed: {e}")
     
 
 
 
-        
-
-
-
-
-
-
-
-
-
-bot.infinity_polling(none_stop = True)
+if __name__ == "__main__":
+    print(len(bot.message_handlers))
+    asyncio.run(main())
