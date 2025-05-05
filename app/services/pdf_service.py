@@ -1,8 +1,10 @@
 from tempfile import gettempdir
 from telebot import async_telebot
 from telebot import types
-from docx2pdf import convert
+# from docx2pdf import convert
 import img2pdf
+import asyncio
+import subprocess
 import os
 
 class PDFService():
@@ -20,7 +22,18 @@ class PDFService():
             with open(docx_path, 'wb') as file:
                 file.write(downloaded_file)
             
-            convert(docx_path, pdf_path)
+            # convert(docx_path, pdf_path)
+            process = await asyncio.create_subprocess_exec(
+                'libreoffice', '--headless', '--convert-to', 'pdf',
+                '--outdir', temp_dir, docx_path,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE
+            )
+            
+            await process.wait()
+            
+            if process.returncode != 0:
+                raise Exception("Ошибка конвертации LibreOffice")
 
             with open(pdf_path, 'rb') as pdf_file:
                 await bot.send_document(
