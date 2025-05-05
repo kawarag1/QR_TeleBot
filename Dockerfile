@@ -2,7 +2,8 @@
 FROM python:3.10.10-slim AS prod
 
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends\
+    libreoffice-writer \
     gcc \
     curl \
     && rm -rf /var/lib/apt/lists/*

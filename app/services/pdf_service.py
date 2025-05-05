@@ -24,10 +24,13 @@ class PDFService():
             
             # convert(docx_path, pdf_path)
             process = await asyncio.create_subprocess_exec(
-                'libreoffice', '--headless', '--convert-to', 'pdf',
-                '--outdir', temp_dir, docx_path,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE
+                'libreoffice',
+                '--headless',
+                '--convert-to', 'pdf:writer_pdf_Export',
+                '--outdir', temp_dir,
+                docx_path,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE
             )
             
             await process.wait()
