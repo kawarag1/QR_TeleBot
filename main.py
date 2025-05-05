@@ -2,6 +2,7 @@ import asyncio
 
 from app.bot.bot_instance import bot
 from app.message_handlers.url_handler import *
+from app.message_handlers.file_handler import *
 from app.message_handlers.welcome_message import *
 
 

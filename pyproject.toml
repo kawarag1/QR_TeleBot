@@ -11,6 +11,8 @@ pytelegrambotapi = "^4.25.0"
 pypng = "^0.20220715.0"
 pyqrcode = "^1.2.1"
 aiohttp = "^3.11.16"
+img2pdf = "^0.6.1"
+docx2pdf = "^0.1.8"
 
 
 [build-system]

@@ -6,7 +6,7 @@ from app.services.url_service import UrlService
 from app.services.qr_service import QRService
 
 
-@bot.message_handler(func = lambda m:True)
+@bot.message_handler(content_types = ['text'])
 async def send_qr(message: types.Message):
     try:
         if not message.text:
